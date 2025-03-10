@@ -32,6 +32,28 @@
                 @enderror
             </div>
 
+            <!-- Tags Selection -->
+            <div>
+                <label for="tags" class="block text-lg font-medium text-gray-700">Tags</label>
+                <div class="mt-2 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2">
+                    @foreach($tags as $tag)
+                        <div class="flex items-center">
+                            <input type="checkbox" id="tag-{{ $tag->id }}" name="tags[]" value="{{ $tag->id }}"
+                                class="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+                                {{ in_array($tag->id, old('tags', [])) ? 'checked' : '' }}>
+                            <label for="tag-{{ $tag->id }}" 
+                                class="ml-2 block text-sm font-medium" 
+                                style="color: {{ isLightColor($tag->color) ? '#000000' : '#FFFFFF' }}; background-color: {{ $tag->color }}; padding: 2px 8px; border-radius: 9999px;">
+                                {{ $tag->name }}
+                            </label>
+                        </div>
+                    @endforeach
+                </div>
+                @error('tags')
+                    <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                @enderror
+            </div>
+
             <!-- Submit Button -->
             <div class="flex justify-start">
                 <button type="submit" 

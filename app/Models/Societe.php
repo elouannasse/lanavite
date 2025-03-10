@@ -4,13 +4,22 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Societe extends Model
 {
     use HasFactory;
-    protected $table = "societes";
+
     protected $fillable = [
-        "name",
-        "description"
+        'name',
+        'description',
     ];
+
+    
+    
+     
+    public function tags(): BelongsToMany
+    {
+        return $this->belongsToMany(Tag::class, 'societe_tag');
+    }
 }
